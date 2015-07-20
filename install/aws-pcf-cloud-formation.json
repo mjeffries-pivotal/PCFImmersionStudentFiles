@@ -102,11 +102,6 @@
       "Default" : "https://s3.amazonaws.com/pcf-training/p-mysql-1.5.0.0.pivotal",
       "Description": "Optional URL to desired MySQL Service to download and import"
     },
-    "JenkinsURL": {
-      "Type": "String",
-      "Default" : "https://s3.amazonaws.com/pcf-training/p-jenkins-1.3.8.3.pivotal",
-      "Description": "Optional URL to desired Cloudbees Jenkins Service to download and import"
-    },
      "OpsMetricsURL": {
       "Type": "String",
       "Default" : "https://s3.amazonaws.com/pcf-training/p-metrics-1.4.0.0.pivotal",
@@ -311,7 +306,6 @@
             "printf 'create database uaa;\ncreate database ccdb;\ncreate database console;\ncreate database notifications;\ncreate database autoscale;\ncreate database app_usage_service;\n' > /tmp/createdb.sql","\n",
             "erurl=",{"Ref": "ElasticRuntimeURL"},"\n",
             "mysqlurl=",{"Ref": "MySQLURL"},"\n",
-            "jenkinsurl=",{"Ref": "JenkinsURL"},"\n",
             "opsmetricsurl=",{"Ref": "OpsMetricsURL"},"\n",
             "if [ ${#erurl} -gt 5 ]; then","\n",
               "wget -P /tmp $erurl","\n",
@@ -322,11 +316,6 @@
               "wget -P /tmp $mysqlurl","\n",
               "#### Dynamic Name from file not working due to variable inside single quotes ### - curl 'https://localhost/api/products' -F 'product[file]=@/tmp/${mysqlurl##*/}' -X POST -k -u ",{ "Ref" : "OpsMgrWebUID" },":",{ "Ref" : "OpsMgrWebPW" },"\n",
               "curl 'https://localhost/api/products' -F 'product[file]=@/tmp/p-mysql-1.5.0.0.pivotal' -X POST -k -u ",{ "Ref" : "OpsMgrWebUID" },":",{ "Ref" : "OpsMgrWebPW" },"\n",
-            "fi","\n",
-            "if [ ${#jenkinsurl} -gt 5 ]; then","\n",
-              "wget -P /tmp $jenkinsurl","\n",
-              "#### Dynamic Name from file not working due to variable inside single quotes ### - curl 'https://localhost/api/products' -F 'product[file]=@/tmp/${jenkinsurl##*/}' -X POST -k -u ",{ "Ref" : "OpsMgrWebUID" },":",{ "Ref" : "OpsMgrWebPW" },"\n",
-              "curl 'https://localhost/api/products' -F 'product[file]=@/tmp/p-jenkins-1.3.8.3.pivotal' -X POST -k -u ",{ "Ref" : "OpsMgrWebUID" },":",{ "Ref" : "OpsMgrWebPW" },"\n",
             "fi","\n",
             "if [ ${#opsmetricsurl} -gt 5 ]; then","\n",
               "wget -P /tmp $opsmetricsurl","\n",
