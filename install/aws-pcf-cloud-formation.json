@@ -134,15 +134,10 @@
       "MinLength": "1",
       "Type": "String"
     },
-    "origOpsMgrAMI": {
-      "Type": "String",
-      "Default": "ami-a03126c8",
-      "Description": "Enter Ops Manager AMI"
-    },
     "OpsMgrAMI": {
       "Type": "String",
       "Default": "ami-4ba80e20",
-      "Description": "Enter Ops Manager AMI"
+      "Description": "Enter Ops Manager AMI (orig version is ami-a03126c8)"
     },
     "AWSRegion": {
       "Type": "String",
@@ -447,7 +442,6 @@
 
         "SecurityGroupIngress": [
 
-
           {
             "CidrIp": "10.0.0.0/16",
             "FromPort": "3306",
@@ -472,7 +466,6 @@
         "GroupDescription": "PCF Elastic Load Balancer SecurityGroup",
 
         "SecurityGroupIngress": [
-
 
           {
             "CidrIp": "0.0.0.0/0",
