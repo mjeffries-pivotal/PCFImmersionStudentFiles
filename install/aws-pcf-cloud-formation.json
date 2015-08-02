@@ -134,9 +134,14 @@
       "MinLength": "1",
       "Type": "String"
     },
-    "OpsMgrAMI": {
+    "origOpsMgrAMI": {
       "Type": "String",
       "Default": "ami-a03126c8",
+      "Description": "Enter Ops Manager AMI"
+    },
+    "OpsMgrAMI": {
+      "Type": "String",
+      "Default": "ami-4ba80e20",
       "Description": "Enter Ops Manager AMI"
     },
     "AWSRegion": {
@@ -298,32 +303,6 @@
             "Value": { "Fn::Join" : [ "-", [ "OpsManager", { "Ref": "AWS::StackName"} ] ] }
           }
         ],
-        "UserData" : { "Fn::Base64" : { "Fn::Join" : ["",[
-            "#!/bin/bash -ex","\n",
-             "sleep 45","\n",
-            "## This sleep just makes sure opsmanager gets started up before doing curl below - probably better way to do this","\n",
-            "curl --insecure \"https://localhost/api/users\" -d 'user[user_name]=",{ "Ref" : "OpsMgrWebUID" },"&user[password]=",{ "Ref" : "OpsMgrWebPW" },"&user[password_confirmation]=",{ "Ref" : "OpsMgrWebPW" },"' -X POST","\n",
-            "printf 'create database uaa;\ncreate database ccdb;\ncreate database console;\ncreate database notifications;\ncreate database autoscale;\ncreate database app_usage_service;\n' > /tmp/createdb.sql","\n",
-            "erurl=",{"Ref": "ElasticRuntimeURL"},"\n",
-            "mysqlurl=",{"Ref": "MySQLURL"},"\n",
-            "opsmetricsurl=",{"Ref": "OpsMetricsURL"},"\n",
-            "if [ ${#erurl} -gt 5 ]; then","\n",
-              "wget -P /tmp $erurl","\n",
-              "#### Dynamic Name from file not working due to variable inside single quotes ### - curl 'https://localhost/api/products' -F 'product[file]=@/tmp/${erurl##*/}' -X POST -k -u ",{ "Ref" : "OpsMgrWebUID" },":",{ "Ref" : "OpsMgrWebPW" },"\n",
-              "curl 'https://localhost/api/products' -F 'product[file]=@/tmp/cf-1.4.2.0.pivotal' -X POST -k -u ",{ "Ref" : "OpsMgrWebUID" },":",{ "Ref" : "OpsMgrWebPW" },"\n",
-            "fi","\n",
-            "if [ ${#mysqlurl} -gt 5 ]; then","\n",
-              "wget -P /tmp $mysqlurl","\n",
-              "#### Dynamic Name from file not working due to variable inside single quotes ### - curl 'https://localhost/api/products' -F 'product[file]=@/tmp/${mysqlurl##*/}' -X POST -k -u ",{ "Ref" : "OpsMgrWebUID" },":",{ "Ref" : "OpsMgrWebPW" },"\n",
-              "curl 'https://localhost/api/products' -F 'product[file]=@/tmp/p-mysql-1.5.0.0.pivotal' -X POST -k -u ",{ "Ref" : "OpsMgrWebUID" },":",{ "Ref" : "OpsMgrWebPW" },"\n",
-            "fi","\n",
-            "if [ ${#opsmetricsurl} -gt 5 ]; then","\n",
-              "wget -P /tmp $opsmetricsurl","\n",
-              "#### Dynamic Name from file not working due to variable inside single quotes ### - curl 'https://localhost/api/products' -F 'product[file]=@/tmp/${opsmetricsurl##*/}' -X POST -k -u ",{ "Ref" : "OpsMgrWebUID" },":",{ "Ref" : "OpsMgrWebPW" },"\n",
-              "curl 'https://localhost/api/products' -F 'product[file]=@/tmp/p-metrics-1.4.0.0.pivotal' -X POST -k -u ",{ "Ref" : "OpsMgrWebUID" },":",{ "Ref" : "OpsMgrWebPW" },"\n",
-            "fi","\n",
-             "touch /tmp/done.txt","\n"
-        ]]}},
         "NetworkInterfaces": [
           {
             "DeleteOnTermination": "true",
