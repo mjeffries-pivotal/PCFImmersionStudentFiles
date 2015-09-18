@@ -64,6 +64,13 @@ def shutdown():
          print "Stopping Instance: " + instanceid[y] + " : " + instancename[y]
          stopinstance(instanceid[y])
         break;
+ print "Shutdown all instances from bootorder.txt.  Pausing and shutting down any remaining instances."
+ example_1(5)
+ for y in range (0,numinstance):
+  if checkinstance(instanceid[y]) == "running":
+   print "Stopping Instance: " + instanceid[y] + " : " + instancename[y]
+   stopinstance(instanceid[y])
+
  print "Shutdown Complete!"       
  
 def startup():
