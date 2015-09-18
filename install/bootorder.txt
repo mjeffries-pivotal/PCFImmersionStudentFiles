@@ -1,6 +1,7 @@
-Ops Manager
-Nat1
+OpsManager
+Nat
 nats
+consul_server
 etcd
 nfs_server
 ccdb
@@ -21,3 +22,4 @@ dea
 doppler
 loggregator_trafficcontroller
 cloud_controller-partition
+maximus
