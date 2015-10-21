@@ -44,7 +44,7 @@ def shutdown():
  numinstance = 0
  for res in reservations:
      for inst in res.instances:
-            if (inst.state == "running" and inst.vpc_id == vpc_id):
+            if (inst.vpc_id == vpc_id):
              instanceid.append(inst.id)
              instancename.append(inst.tags['Name'])
              if 'Name' in inst.tags:
@@ -53,8 +53,9 @@ def shutdown():
                numinstance = numinstance + 1
 
  ## Microbosh should be shutdown first or you'll have things likely ressurected!
- print "Stopping Microbosh"
- stopinstance(instanceid[microboshinstance])
+ if checkinstance(instanceid[microboshinstance]) == "running":
+  print "Stopping Microbosh"
+  stopinstance(instanceid[microboshinstance])
  
  for x in range(bootinstances - 1, -1,-1):
       for y in range (0,numinstance):
@@ -63,7 +64,15 @@ def shutdown():
          print "Stopping Instance: " + instanceid[y] + " : " + instancename[y]
          stopinstance(instanceid[y])
         break;
+ print "Shutdown all instances from bootorder.txt.  Pausing and shutting down any remaining instances."
+ example_1(5)
+ for y in range (0,numinstance):
+  if checkinstance(instanceid[y]) == "running":
+   print "Stopping Instance: " + instanceid[y] + " : " + instancename[y]
+   stopinstance(instanceid[y])
+
  print "Shutdown Complete!"       
+ 
 def startup():
  numinstance = 0
  for res in reservations:
@@ -73,7 +82,7 @@ def startup():
              instancename.append(inst.tags['Name'])
              if inst.tags['Name'].find("microbosh") <> -1:
               microboshinstance = numinstance
-             if inst.tags['Name'].find("Ops Manager") <> -1:
+             if inst.tags['Name'].find("OpsManager") <> -1:
               OpsManagerInstanceId = inst.id
              if inst.tags['Name'].find("router") <> -1:
               print "Found a router - marking for ELB Addition..."
