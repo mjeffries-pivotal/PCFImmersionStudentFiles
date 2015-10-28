@@ -122,8 +122,8 @@
     "OpsMgrWebPW": {
       "Type": "String",
       "NoEcho": "true",
-      "Default": "password",
-      "Description": "Ops Manager Web Password - (default is password, recommend using the PCFFoundationGroupID value)"
+      "Default": "piv0tal",
+      "Description": "Ops Manager Web Password - (default is piv0tal, recommend using the PCFFoundationGroupID value)"
     },
     "KeyName": {
       "AllowedPattern": "[-_ a-zA-Z0-9]*",
