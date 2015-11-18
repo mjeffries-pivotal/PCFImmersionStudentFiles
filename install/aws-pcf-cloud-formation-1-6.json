@@ -92,21 +92,6 @@
       "MaxLength": "32",
       "Description": "Enter PCF foundation group ID that the instructor has provided. (This is the IAMS user group name that was created for this class.)  This can also be used as the Ops Manager web admin password."
     },
-    "ElasticRuntimeURL": {
-      "Type": "String",
-      "Default" : "https://s3.amazonaws.com/pcf-training/cf-1.4.2.0.pivotal",
-      "Description": "Enter the optional URL to desired Elastic Runtime to download and import"
-    },
-     "MySQLURL": {
-      "Type": "String",
-      "Default" : "https://s3.amazonaws.com/pcf-training/p-mysql-1.5.0.0.pivotal",
-      "Description": "Optional URL to desired MySQL Service to download and import"
-    },
-     "OpsMetricsURL": {
-      "Type": "String",
-      "Default" : "https://s3.amazonaws.com/pcf-training/p-metrics-1.4.0.0.pivotal",
-      "Description": "Optional URL to desired Ops Metrics Service to download and import"
-    },
     "OpsMgrWebUID": {
       "Type": "String",
       "Default": "admin",
@@ -136,8 +121,8 @@
     },
     "OpsMgrAMI": {
       "Type": "String",
-      "Default": "ami-c5ed9baf",
-      "Description": "Enter Ops Manager AMI (orig is ami-d3e4b1b6)"
+      "Default": "ami-d5d297bf",
+      "Description": "Enter Ops Manager AMI (orig is ami-d8d2abb2)"
     },
     "AWSRegion": {
       "Type": "String",
