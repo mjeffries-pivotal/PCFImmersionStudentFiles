@@ -121,8 +121,8 @@
     },
     "OpsMgrAMI": {
       "Type": "String",
-      "Default": "ami-d5d297bf",
-      "Description": "Enter Ops Manager AMI (orig is ami-d8d2abb2)"
+      "Default": "ami-3a3b7550",
+      "Description": "Enter Ops Manager AMI (orig is ami-5e1a5634)"
     },
     "AWSRegion": {
       "Type": "String",
