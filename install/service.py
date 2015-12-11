@@ -48,7 +48,7 @@ def shutdown():
              instanceid.append(inst.id)
              instancename.append(inst.tags['Name'])
              if 'Name' in inst.tags:
-               if inst.tags['Name'].find("microbosh") <> -1:
+               if inst.tags['Name'].find("p-bosh") <> -1:
                 microboshinstance = numinstance
                numinstance = numinstance + 1
 
@@ -80,7 +80,7 @@ def startup():
             if (inst.state == "stopped" and inst.vpc_id == vpc_id):
              instanceid.append(inst.id)
              instancename.append(inst.tags['Name'])
-             if inst.tags['Name'].find("microbosh") <> -1:
+             if inst.tags['Name'].find("p-bosh") <> -1:
               microboshinstance = numinstance
              if inst.tags['Name'].find("OpsManager") <> -1:
               OpsManagerInstanceId = inst.id
