@@ -9,7 +9,6 @@
     },
     "04RdsDBName": {
       "Type": "String",
-      "MinLength": "4",
       "Default": "bosh",
       "Description": "BOSH database name"
     },
@@ -20,7 +19,6 @@
     "06RdsPassword": {
       "Type": "String",
       "NoEcho": "true",
-      "MinLength": "8",
       "Description": "BOSH database password"
     },
     "07SSLCertificateARN": {
